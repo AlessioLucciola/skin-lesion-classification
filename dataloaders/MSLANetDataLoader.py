@@ -187,7 +187,7 @@ class MSLANetDataLoader(DataLoader):
 
     def offline_init_metadata(self, metadata: pd.DataFrame):
 
-        data_dir = os.path.join(DATA_DIR, "offline_computed_dataset")
+        data_dir = os.path.join(DATA_DIR, "offline_computed_dataset_no_synthetic")
         offline_images_dir = os.path.join(data_dir, "offline_images")
         low_threshold_dir = os.path.join(data_dir, "gradcam_70")
         high_threshold_dir = os.path.join(
