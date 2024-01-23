@@ -6,7 +6,7 @@ We use Python 3.10.11 which is the last version supported by PyTorch. To crete t
 
 ```
 conda env create -f environment.yaml
-conda activate aml_project
+conda activate cv_project
 ```
 
 ## Data

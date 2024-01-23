@@ -99,7 +99,7 @@ class LANet(nn.Module):
 if __name__ == "__main__":
     cam_instance = GradCAM()
     lanet_model = LANet()
-    image_path = "/Users/dov/Library/Mobile Documents/com~apple~CloudDocs/dovsync/Documenti Universita/Advanced Machine Learning/AML Project.nosync/melanoma-detection/data/HAM10000_images_test/ISIC_0034524.jpg"
+    image_path = ""
     thresholds = [120]
     for t in thresholds:
         _, cropped_img, _ = cam_instance.generate_cam(image_path, t)
