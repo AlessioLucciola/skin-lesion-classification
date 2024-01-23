@@ -67,12 +67,12 @@ def create_line_plots(metrics, data, models_name, configuration, save_plot_prefi
 
 # ---CONFIGURATIONS---#
 test_folders = [
-    "densenet",
+    "mslanet"
 ]
-metrics = [('accuracy', 'Accuracy'), ('recall', 'Recall'), ('loss', 'Cross Entropy Loss')]
-models_name = ["Densenet121"]
+metrics = [('accuracy', 'Accuracy'), ('sensitivity', 'Sensitivity'), ('loss', 'Cross Entropy Loss')]
+models_name = ["MSLANet v2"]
 batch_size = 256
-configuration = f"Multiple_Loss=True, Segmentation=Dynamic, Keep_Background=True, Batch Size={batch_size}"
+configuration = f"Segmentation=SAM, LR=1e-5, Batch Size={batch_size}"
 
 
 assert len(test_folders) == len(
