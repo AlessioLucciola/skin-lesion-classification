@@ -28,11 +28,11 @@ To train a model:
 -   If you want to resume the training of a model, set `RESUME=True` in the config file, select the folder in which the model is and the checkpoint model. Then start the training again with the command above.
 
 ## Testing
-To test a model go to `train_loops.test_loop` and select the model to test (chechpoint number or "best"). Then start `python -m train_loops.test_loop`.
+To test a model go to `train_loops.test_loop` and select the model to test (chechpoint number or "best"). Then start `python -m train_loops.test_loop`. MSLANet has its own testing loop that also considers the results for each class, run `python -m train_loops.mslanet_test_loop`.
 
 ## Plots
 The plotting function can be found in the `plots` folder. Ensure you have the `tr_val_results.json` and `test_results.json` for a specific model in the `results` folder.
-Select the folder name of the model(s) of which to plot the results, then run `python -m plots.test_plots` and `python -m plots.train_plots`.
+Select the folder name of the model(s) of which to plot the results, then run `python -m plots.test_plots` and `python -m plots.train_plots`. For MSLANet, use `python -m plots.train_plots_mslanet`.
 
 ## Demo
 To run the demo, execute `python -m demo.demo_app`. Notice that it is necessary to choose the model to use in the `demo.demo_app` file (the process is the same as the one used in the testing phase).
