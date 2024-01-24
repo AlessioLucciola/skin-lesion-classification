@@ -1,5 +1,11 @@
 # Melanoma detection
 
+This project was done by:
+*   Danilo Corsi (matr. 1742375)
+*   Alessio Lucciola (matr. 1823638)
+*   Domiziano Scarcelli (matr. 1872664)
+The Group ID is: 35
+
 ## Installation
 
 We use Python 3.10.11 which is the last version supported by PyTorch. To crete the environment using conda just do

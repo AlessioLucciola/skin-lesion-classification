@@ -15,12 +15,7 @@ from shared.constants import DEFAULT_STATISTICS, IMAGENET_STATISTICS
 from train_loops.SAM_pretrained import preprocess_images
 from utils.utils import approximate_bounding_box_to_square, crop_image_from_box, get_bounding_boxes_from_segmentation, resize_images, resize_segmentations, select_device
 from models.SAM import SAM
-from models.ResNet34Pretrained import ResNet34Pretrained
-from models.DenseNetPretrained import DenseNetPretrained
-from models.InceptionV3Pretrained import InceptionV3Pretrained
-from models.ViTStandard import ViT_standard
-from models.ViTPretrained import ViT_pretrained
-from models.ViTEfficient import EfficientViT
+from models.MSLANet import MSLANet
 
 device = select_device()
 SAM_IMG_SIZE = 128
@@ -40,43 +35,8 @@ def get_model(model_path, epoch, sam_checkpoint_path="checkpoints/sam_checkpoint
     else:
         print("--Model-- Old configurations NOT found. Using configurations in the config for test.")
 
-    type = model_path.split('_')[0]
-    if type == "resnet34":
-        model = ResNet34Pretrained(
-            HIDDEN_SIZE if configurations is None else configurations["hidden_size"], NUM_CLASSES if configurations is None else configurations["num_classes"]).to(device)
-        normalization_stats = IMAGENET_STATISTICS
-    elif type == "densenet121":
-        model = DenseNetPretrained(
-            HIDDEN_SIZE if configurations is None else configurations["hidden_size"], NUM_CLASSES if configurations is None else configurations["num_classes"]).to(device)
-        normalization_stats = IMAGENET_STATISTICS
-    elif type == "inception_v3":
-        model = InceptionV3Pretrained(
-            HIDDEN_SIZE if configurations is None else configurations["hidden_size"], NUM_CLASSES if configurations is None else configurations["num_classes"]).to(device)
-        normalization_stats = IMAGENET_STATISTICS
-    elif type == "standard":
-        model = ViT_standard(in_channels=INPUT_SIZE if configurations is None else configurations["input_size"],
-                             patch_size=PATCH_SIZE if configurations is None else configurations[
-                                 "patch_size"],
-                             d_model=EMB_SIZE if configurations is None else configurations[
-                                 "emb_size"],
-                             img_size=IMAGE_SIZE if configurations is None else configurations[
-                                 "image_size"],
-                             n_classes=NUM_CLASSES if configurations is None else configurations[
-                                 "num_classes"],
-                             n_head=N_HEADS if configurations is None else configurations["n_heads"],
-                             n_layers=N_LAYERS if configurations is None else configurations["n_layers"],
-                             dropout=DROPOUT_P).to(device)
-        normalization_stats = DEFAULT_STATISTICS
-    elif type == "pretrained":
-        model = ViT_pretrained(
-            HIDDEN_SIZE if configurations is None else configurations["hidden_size"], NUM_CLASSES if configurations is None else configurations["num_classes"], pretrained=True, dropout=DROPOUT_P).to(device)
-        normalization_stats = IMAGENET_STATISTICS
-    elif type == "efficient":
-        model = EfficientViT(img_size=224, patch_size=16, in_chans=INPUT_SIZE if configurations is None else configurations["input_size"], stages=['s', 's', 's'],
-                             embed_dim=[64, 128, 192], key_dim=[16, 16, 16], depth=[1, 2, 3], window_size=[7, 7, 7], kernels=[5, 5, 5, 5])
-        normalization_stats = DEFAULT_STATISTICS
-    else:
-        raise ValueError(f"Unknown architecture {type}")
+    model = MSLANet(input_size=INPUT_SIZE, hidden_layers=HIDDEN_SIZE, dropout_p=DROPOUT_P, num_classes=NUM_CLASSES).to(device)
+    normalization_stats = IMAGENET_STATISTICS
 
     state_dict = torch.load(
         f"{PATH_TO_SAVE_RESULTS}/{model_path}/models/melanoma_detection_{epoch}.pt")
