@@ -54,3 +54,7 @@ Select the folder name of the model(s) of which to plot the results, then run `p
 ## Demo
 To run the demo, execute `python -m demo.demo_app`. Notice that it is necessary to choose the model to use in the `demo.demo_app` file (the process is the same as the one used in the testing phase).
 
+https://github.com/AlessioLucciola/skin-lesion-classification/assets/80223097/fd02a734-d004-4438-97af-acb719dbcf13
+
+
+
